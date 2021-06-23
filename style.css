@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+ul{
+  list-style: none;
+}
+
 a{
   text-decoration:none;
 }
@@ -15,19 +19,21 @@ img{
 }
 /*=====Variáveis======*/
 :root{
-  --header-height: 4.5rem;
-
-
   --base-color: #A152EF;
   --base-color-second: #D4CADD;
-  --base-color-alt: hsl(var(--hue) 57% 53%);
+  /* --base-color-alt: hsl(var(--hue) 57% 53%); */
   --title-color: black;
   --text-color: ##767676;
-  --text-color-light: hsl(0 0% 98%);
+  /* --text-color-light: hsl(0 0% 98%); */
   --body-color: #F9F9F9;
 }
 
 /*=====Base=====*/
+
+html{
+  scroll-behavior: smooth;
+}
+
 body{
   font: 400 1rem 'DM Sans', sans-serif;
   background: var(--body-color);
@@ -35,7 +41,7 @@ body{
   -webkit-font-feature-smoothing: antialiased;
 }
 
-h1{
+.title {
   font: 700 1.875rem 'Poppins', sans-serif;
   color: var(--title-color);
   -webkit-font-feature-smoothing: auto;
@@ -62,6 +68,7 @@ h1{
   margin-bottom: 2rem;
   display: flex;
   width: 100%;
+
   position: fixed;
   z-index: 100;
   top: 0;
@@ -69,6 +76,15 @@ h1{
   background-color: var(--body-color);
 }
 
+#header.scroll{
+  box-shadow: 0px 0px 12px darkgray;
+}
+
+main {
+  margin-top: 6.5rem;
+}
+
+/*===========Navigation===========*/
 nav{
   height: 4.5rem;
   display: flex;
@@ -77,6 +93,97 @@ nav{
   width: 100%;
 }
 
+
+nav ul li{
+  text-align: center;
+}
+
+nav .menu{
+  opacity: 0;
+  visibility: hidden;
+  top: -20rem;
+  transition:0.2s;
+}
+
+nav .menu ul{
+  display: none;
+}
+
+nav ul li a{
+  transition: color 0.2s;
+  position: relative;
+}
+
+nav ul li a:hover{
+  color: var(--base-color)
+}
+
+nav ul li a::after{
+  content:'';
+  width: 0%;
+  height: 2px;
+  align-content: center;
+  background: var(--base-color);
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  transition: 0.2s;
+}
+nav ul li a:hover::after{
+  width: 100%;
+}
+
+/*Menu monstrando*/
+nav.show .menu{
+  opacity: 100;
+  visibility: visible;
+
+  background: var(--body-color);
+
+  height: 100vh;
+  width: 100vw;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+nav.show .menu ul {
+  display: grid;
+}
+
+nav.show ul.grid{
+  gap: 4rem;
+  margin-top: 6rem;
+}
+
+/*Toggle menu*/
+nav .icon-close{
+  visibility: hidden;
+  opacity: 0;
+
+  position: absolute;
+  top:-1.5rem;
+  right: 1.5rem;
+  
+  transition: 0.2s;
+}
+
+nav.show .icon-close{
+  visibility: visible;
+  opacity: 1;
+  top: 1.5rem;
+}
+
+.toggle{
+  color: var(--base-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/*=====Logo=====*/
 .logo{
   font: 700 1.31rem 'Popins', sans-serif;
   color: var(--title-color);
@@ -100,8 +207,8 @@ nav{
   padding: 5rem 0;
 }
 
-main {
-  margin-top: 5.5rem;
+.section header{
+  margin-bottom: 4rem;
 }
 
 /*=====Home=====*/
@@ -142,10 +249,79 @@ main {
   text-align: center;
 }
 
-#home .text h1{
+#home .text h2{
   margin-bottom: 1rem;
 }
 
 #home .text p{
   margin-bottom: 2rem;
+}
+
+/*=====About=====*/
+#about{
+  overflow: hidden;
+  background: white;
+}
+
+#about .container{
+  margin: 0;
+}
+
+#about .image{
+  position: relative; 
+  padding-bottom: 1rem;
+}
+
+#about .image::before{
+  content: '';
+  height: 100%;
+  width: 100%;
+  background-color: var(--base-color-second);
+  position: absolute;
+  top: -8%;
+  right: 33%;
+  z-index: 0;
+  border-radius:0.25rem;
+}
+
+
+#about .image img{
+  position: relative;
+}
+
+#about .text{
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+#about .text h2{
+  margin-bottom: 1rem;
+}
+
+#about .text p{
+  margin-bottom: 2rem;
+}
+
+/*=====Services=====*/
+.card.grid{
+  gap: 1.5rem;
+}
+.card{
+  padding: 3.625rem 2rem;
+  box-shadow: 0px 0px 12px darkgray;
+  border-bottom:  .25rem solid var(--base-color);
+  border-radius: .25rem .25rem 0 0;
+  text-align: center;
+}
+
+.card h3{
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.card i{
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size:  5rem;
+  color: var(--base-color);
 }
